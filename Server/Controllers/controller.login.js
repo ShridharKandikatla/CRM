@@ -13,7 +13,7 @@ async function Login(req, res) {
   const { email, password } = req.body;
   const result = UserSchema.safeParse({ email, password });
   if (result.success) {
-    const allUsers = await prisma.user.findFirst({
+    const allUsers = await prisma.staff.findFirst({
       where: { email: email, password: password },
     });
     if (allUsers) {

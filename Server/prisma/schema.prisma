@@ -13,8 +13,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
+model Staff{
   id  Int @id @default(autoincrement())
-  email String
+  email String @unique
   password String
+}
+
+// Student model
+model Student {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String?
+  email     String?   @unique
+  mobile    Int 
+  primarySource String
+  secondarySource String
+  diposition String
+  subDiposition String
+  course       Course @relation(fields: [courseId],references: [id])
+  courseId     Int
+  specialization String?
+  ERP_Comments String?
+  // Add more fields as needed
+}
+
+// Course model
+model Course {
+  id        Int      @id @default(autoincrement())
+  name      String
+  students Student[]
+  // Add more fields as needed
 }
