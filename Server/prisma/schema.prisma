@@ -34,6 +34,8 @@ model Student {
   courseId     Int
   specialization String?
   ERP_Comments String?
+  admission Admission[]
+  payment Payment[]
   // Add more fields as needed
 }
 
@@ -42,5 +44,42 @@ model Course {
   id        Int      @id @default(autoincrement())
   name      String
   students Student[]
+  admission Admission[]
+  // Add more fields as needed
+}
+
+// AdmissionStatus model
+model AdmissionStatus {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  count     Int      @default(0)
+  admission Admission[]
+  // Add more fields as needed
+}
+
+// Admission model
+model Admission {
+  id           Int                @id @default(autoincrement())
+  student      Student            @relation(fields: [studentId], references: [id])
+  studentId    Int
+  course       Course             @relation(fields: [courseId], references: [id])
+  courseId     Int
+  status       AdmissionStatus    @relation(fields: [statusId], references: [id])
+  statusId     Int
+  appliedDate  DateTime           @default(now())
+  // Add more fields as needed
+}
+
+// Payment model
+model Payment {
+  id           Int       @id @default(autoincrement())
+  student      Student?   @relation(fields: [studentId], references: [id])
+  studentId    Int
+  amountReceived Int?
+  discountAmount Int
+  discountReason String?
+  studyMaterial Boolean?
+  studyMaterialDiscount Int?
+  paymentDate  DateTime?  @default(now())
   // Add more fields as needed
 }
