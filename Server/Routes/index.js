@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import userRouter from './route.user.js';
+import staffRouter from './route.staff.js';
 
-router.use('/user', userRouter);
+router.use('/staff', staffRouter);
 
 export default router;
