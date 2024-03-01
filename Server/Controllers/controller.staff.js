@@ -110,6 +110,7 @@ async function putProfile(req, res) {
         id: staff.id,
       },
       data: {
+        email: email,
         password: password,
       },
     });
