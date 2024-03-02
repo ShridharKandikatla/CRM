@@ -1,13 +1,22 @@
 
 import './App.css'
-import HomePage from './Components/HomePage'
+
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LoginPage from './Components/LoginPage'
+import HomePage from './Components/HomePage'
+
 
 function App() {
   return (
     <>
       {/* <HomePage /> */}
-      <LoginPage />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<HomePage />} />
+          {/* <Route path="/dashboard" element={<Sidebar />} /> */}
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
