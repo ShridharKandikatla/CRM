@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function createStudent(req, res) {
@@ -7,32 +7,88 @@ async function createStudent(req, res) {
     return res.send('All fields are required').status(400);
   }
   try {
-    await prisma.$transaction([
-      await prisma.student.create({
-        data: {
-          firstName,
-          mobile,
+    const newStudent = await prisma.student.create({
+      data: {
+        firstName,
+        mobile,
+        course: {
+          create: {
+            courseName,
+          },
         },
-      }),
-      await prisma.course.create({
-        data: {
-          courseName,
-        },
-      }),
-    ]);
+      },
+    });
+    res.json({ newStudent });
   } catch (e) {
-    console.log(e);
     res.send(e).status(400);
   }
 }
 
 async function getStudents(req, res) {
+  const { pageNumber } = req.body;
+  if (pageNumber === undefined || pageNumber == 0) {
+    return res.send('Page number not found or invalid').status(400);
+  }
   try {
-    const students = await prisma.student.findMany();
+    const offset = (pageNumber - 1) * 10;
+    const data = await prisma.student.findMany({
+      skip: offset,
+      take: 10,
+      include: {
+        course: true,
+      },
+    });
+    res.send(data);
+  } catch (e) {
+    res.send('Something went wrong').status(400);
+  }
+}
+
+async function getStudentByAnyData(req, res) {
+  if (Object.keys(req.body).length === 0) {
+    return res.send('Body not found').status(400);
+  }
+  try {
+    const students = await prisma.student.findMany({
+      include: {
+        course: true,
+      },
+      where: req.body,
+    });
     res.send(students);
   } catch (e) {
     res.send('Something went wrong').status(400);
   }
 }
 
-export { createStudent, getStudents };
+async function updateStudent(req, res) {
+  const { firstName, mobile, courseName } = req.body;
+  const id = req.params.id;
+  if (!firstName || !mobile || !courseName) {
+    return res.send('All fields are required').status(400);
+  }
+  if (!id) {
+    return res.send('ID not found').status(400);
+  }
+  try {
+    const updateStudent = await prisma.student.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        firstName,
+        mobile,
+        course: {
+          update: {
+            courseName,
+          },
+        },
+      },
+    });
+    res.send(updateStudent);
+  } catch (e) {
+    res.send('Something went wrong').status(400);
+  }
+}
+
+export { createStudent, getStudents, getStudentByAnyData, updateStudent };

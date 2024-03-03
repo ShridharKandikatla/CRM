@@ -32,20 +32,21 @@ model Student {
 
 // Course model
 model Course {
-  courseName      String
+  id           Int       @id @default(autoincrement())
+  courseName      String 
   specialization  String?
   courseFee Int?
   registrationNo Int?
   erpComments String?
 
-  studentId Int     @unique
-  student   Student @relation(fields: [studentId],references: [id], onDelete: Cascade)
+  // studentId Int     @unique
+  student   Student @relation(fields: [id],references: [id], onDelete: Cascade)
   // Add more fields as needed
 }
 
 // Payment model
 model Payment {
-  // id           Int       @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   amountReceived Int?
   discountAmount Int?
   discountReason String?
