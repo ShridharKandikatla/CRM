@@ -5,7 +5,7 @@ import { BsPersonFillSlash } from "react-icons/bs";
 import { PiUserList } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
 
-const sidebar = () => {
+const Sidebar = () => {
     const [open, setOpen] = useState(true);
     const Menus = [
         { title: "Dashboard", src: <MdDashboard /> },
@@ -19,10 +19,10 @@ const sidebar = () => {
         <div>
             <div
                 className={` ${open ? "w-72" : "w-20 "
-                    } bg-purple-900 h-screen p-5  pt-8 relative duration-300`}
+                    } bg-purple-900 h-screen p-5  pt-8 relative duration-300  `}
             >
                 <div
-                    className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
+                    className={`absolute cursor-pointer -right-3 top-9 w-7 border-indigo-200
                     border-2 rounded-full  ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
                 >
@@ -62,4 +62,4 @@ const sidebar = () => {
 
     );
 }
-export default sidebar
+export default Sidebar
