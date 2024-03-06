@@ -2,7 +2,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function createStudent(req, res) {
-  const { firstName, mobile, courseName } = req.body;
+  const { firstName, mobile } = req.body.student;
+  const { courseName } = req.body.course;
   if (!firstName || !mobile || !courseName) {
     return res.send('All fields are required').status(400);
   }
@@ -12,10 +13,11 @@ async function createStudent(req, res) {
         firstName,
         mobile,
         course: {
-          create: {
-            courseName,
-          },
+          create: req.body.course,
         },
+      },
+      include: {
+        course: true,
       },
     });
     res.json({ newStudent });
@@ -62,11 +64,12 @@ async function getStudentByAnyData(req, res) {
 }
 
 async function updateStudent(req, res) {
-  const { firstName, mobile, courseName } = req.body;
-  const id = req.params.id;
+  const { firstName, mobile } = req.body.student;
+  const { courseName } = req.body.course;
   if (!firstName || !mobile || !courseName) {
     return res.send('All fields are required').status(400);
   }
+  const id = req.params.id;
   if (!id) {
     return res.send('ID not found').status(400);
   }
@@ -79,10 +82,11 @@ async function updateStudent(req, res) {
         firstName,
         mobile,
         course: {
-          update: {
-            courseName,
-          },
+          update: req.body.course,
         },
+      },
+      include: {
+        course: true,
       },
     });
     res.send(updateStudent);
@@ -91,4 +95,25 @@ async function updateStudent(req, res) {
   }
 }
 
-export { createStudent, getStudents, getStudentByAnyData, updateStudent };
+async function getCounts(req, res) {
+  try {
+    const statusCounts = await prisma.student.groupBy({
+      by: ['diposition'],
+      _count: {
+        diposition: true,
+      },
+    });
+
+    res.send(statusCounts);
+  } catch (e) {
+    res.send('Something went wrong').status(400);
+  }
+}
+
+export {
+  createStudent,
+  getStudents,
+  getStudentByAnyData,
+  updateStudent,
+  getCounts,
+};

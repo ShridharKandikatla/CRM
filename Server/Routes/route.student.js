@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   createStudent,
+  getCounts,
   getStudentByAnyData,
   getStudents,
   updateStudent,
@@ -11,5 +12,6 @@ router.post('/', createStudent);
 router.get('/', getStudents);
 router.get('/data', getStudentByAnyData);
 router.put('/:id', updateStudent);
+router.get('/count',getCounts )
 
 export default router;
