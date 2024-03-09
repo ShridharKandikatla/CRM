@@ -1,6 +1,13 @@
-import Login from '../Controllers/controller.login.js';
+import {
+  Login,
+  Register,
+  deleteProfile,
+  getProfile,
+  putProfile,
+} from '../Controllers/controller.staff.js';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
+import authMiddleware from '../Middlewares/authMiddleware.js';
 const router = express.Router();
 
 const limiter = rateLimit({
@@ -11,6 +18,10 @@ const limiter = rateLimit({
     res.status(options.statusCode).send(options.message),
 });
 
+router.post('/register', Register);
 router.post('/login', limiter, Login);
+router.get('/profile', authMiddleware, getProfile);
+router.delete('/profile', authMiddleware, deleteProfile);
+router.put('/profile', authMiddleware, putProfile);
 
 export default router;

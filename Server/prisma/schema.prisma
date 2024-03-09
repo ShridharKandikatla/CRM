@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -22,64 +16,45 @@ model Staff{
 // Student model
 model Student {
   id        Int      @id @default(autoincrement())
+  gender    String?
   firstName String
   lastName  String?
   email     String?   @unique
-  mobile    Int 
-  primarySource String
-  secondarySource String
-  diposition String
-  subDiposition String
-  course       Course @relation(fields: [courseId],references: [id])
-  courseId     Int
-  specialization String?
-  ERP_Comments String?
-  admission Admission[]
-  payment Payment[]
+  mobile    String 
+  diposition String @default("01 - New")
+  subDiposition String? @default("Not Known")
+
+
+  course       Course? 
+  payment Payment?
   // Add more fields as needed
 }
 
 // Course model
 model Course {
-  id        Int      @id @default(autoincrement())
-  name      String
-  students Student[]
-  admission Admission[]
-  // Add more fields as needed
-}
+  id           Int       @id @default(autoincrement())
+  courseName      String 
+  specialization  String?
+  courseFee Int?
+  registrationNo Int?
+  erpComments String?
 
-// AdmissionStatus model
-model AdmissionStatus {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  count     Int      @default(0)
-  admission Admission[]
-  // Add more fields as needed
-}
-
-// Admission model
-model Admission {
-  id           Int                @id @default(autoincrement())
-  student      Student            @relation(fields: [studentId], references: [id])
-  studentId    Int
-  course       Course             @relation(fields: [courseId], references: [id])
-  courseId     Int
-  status       AdmissionStatus    @relation(fields: [statusId], references: [id])
-  statusId     Int
-  appliedDate  DateTime           @default(now())
+  // studentId Int     @unique
+  student   Student @relation(fields: [id],references: [id], onDelete: Cascade)
   // Add more fields as needed
 }
 
 // Payment model
 model Payment {
   id           Int       @id @default(autoincrement())
-  student      Student?   @relation(fields: [studentId], references: [id])
-  studentId    Int
   amountReceived Int?
-  discountAmount Int
+  discountAmount Int?
   discountReason String?
-  studyMaterial Boolean?
+  studyMaterial String?
   studyMaterialDiscount Int?
   paymentDate  DateTime?  @default(now())
-  // Add more fields as needed
+
+
+  studentId    Int       @unique
+  student      Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }

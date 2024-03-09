@@ -3,24 +3,27 @@ import express from 'express';
 import helmet from 'helmet';
 import mainRouter from './Routes/index.js';
 import fs from 'fs';
-import path, { dirname } from 'path';
+import morgan from 'morgan';
 
 const app = express();
 app.use(express.json());
 app.use(helmet());
 
 // Logging and monitoring
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-// const accessLogStream = fs.createWriteStream(
-//   path.join(__dirname, 'access.log'),
-//   { flags: 'a' }
-// );
-// app.use(morgan('combined', { stream: accessLogStream }));
+const accessLogStream = fs.createWriteStream('./Log/access.log', {
+  flags: 'a',
+});
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use('/api/v1', mainRouter);
 
+app.all('*', (req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
 app.use((err, req, res, next) => {
   console.log(err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(process.env.PORT || 5050, () => {
