@@ -19,7 +19,7 @@ const Sidebar = () => {
         <div>
             <div
                 className={` ${open ? "w-72" : "w-20 "
-                    } bg-purple-900 h-screen p-5  pt-8 relative duration-300  `}
+                    } bg-purple-900 h-full p-5  pt-8 relative duration-300  `}
             >
                 <div
                     className={`absolute cursor-pointer -right-3 top-9 w-7 border-indigo-200
@@ -28,7 +28,7 @@ const Sidebar = () => {
                 >
                     <FaArrowLeft color="white" />
                 </div>
-                <div className="flex gap-x-4 items-center">
+                <div className="flex items-center gap-x-4">
                     <img
                         src="./src/assets/logo.png"
                         className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"

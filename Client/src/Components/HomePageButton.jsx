@@ -26,13 +26,13 @@ const HomePageButton = () => {
 
 
     return (
-        <>
+        <div className="pb-3 mx-4">
             {BtnName.map((Menu, index) => (
                 <button key={index} type="button" className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-1.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">{Menu.name}</button>
             ))}
 
             {/* {myButtonList} */}
-        </>
+        </div>
     )
 }
 export default HomePageButton

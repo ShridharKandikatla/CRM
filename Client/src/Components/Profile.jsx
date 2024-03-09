@@ -4,35 +4,22 @@ import 'flowbite';
 
 
 export default function Profile() {
-    const [open, setOpen] = useState(false);
-
     return (
 
         <div>
-            <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" className="flex" type="button">
-                {/* <span className="sr-only">Open user menu</span>
-                <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" /> */}
-                <BsPersonCircle />
-            </button>
-            <div id="dropdownLeft" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-
-
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                    </li>
-                    <li>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                    </li>
-                </ul>
-
+            {/*  */}
+            <div className="relative inline-block group">
+                <button className="w-12 h-12 bg-gray-300 rounded-full">
+                    {/* Your profile picture goes here */}
+                    <BsPersonCircle className="w-12 h-12" />
+                </button>
+                <div className="absolute right-0 hidden w-48 py-1 mt-2 bg-white rounded-md shadow-lg group-hover:block ring-1 ring-black ring-opacity-5">
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Out</a>
+                </div>
             </div>
+
         </div >
 
     );
