@@ -67,14 +67,13 @@ async function Login(req, res) {
 }
 
 async function getProfile(req, res) {
-  const { id } = req.body;
-  if (!id) {
+  if (!req.id) {
     return res.send('ID not found').status(400);
   }
   try {
     const profile = await prisma.staff.findFirst({
       where: {
-        id: id,
+        id: req.id,
       },
     });
 
@@ -97,7 +96,7 @@ async function putProfile(req, res) {
   try {
     const staff = await prisma.staff.findUnique({
       where: {
-        email: email,
+        id: req.id,
       },
     });
 
@@ -122,14 +121,13 @@ async function putProfile(req, res) {
 }
 
 async function deleteProfile(req, res) {
-  const { id } = req.body;
-  if (!id) {
+  if (!req.id) {
     return res.send('ID not found').status(400);
   }
   try {
     const profile = await prisma.staff.delete({
       where: {
-        id: id,
+        id: req.id,
       },
     });
     res.send({ profile }).status(200);
