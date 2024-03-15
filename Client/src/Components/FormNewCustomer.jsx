@@ -3,9 +3,33 @@ import { useState } from "react"
 // import Trash from "./icons/Trash"
 import Modal from "./Modal";
 import { FaPlus } from "react-icons/fa";
+import url from "../../url";
+import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 export default function FormNewCustomer() {
-    const [open, setOpen] = useState(false)
+    // const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [mobileNo, setMobileNo] = useState("");
+
+    const OnSave = async () => {
+        const response = await axios.post(url + "staff/login", {
+            firstName,
+            mobileNo,
+        });
+
+        if (response.status == 200) {
+            // localStorage.setItem("token", response.data.token);
+            // navigate("/")
+            alert("data saved");
+        } else if (response.status == 400) {
+            console.error("Invalid Email And Password");
+        } else {
+            console.error("Invalid Email And Password");
+        }
+    }
+
     return (
         <main className="App">
             <button className="btn btn-danger" onClick={() => setOpen(true)}>
@@ -18,12 +42,12 @@ export default function FormNewCustomer() {
                     <div className="flex flex-col p-8 space-y-4 bg-white rounded shadow-lg">
                         <h2 className="text-xl font-bold text-gray-900">Quick Add</h2>
                         <div className="flex space-x-8">
-                            <input className="flex-grow p-2 border" type="text" placeholder="First Name*" required />
+                            <input onChange={(e) => { setFirstName(e.target.value) }} className="flex-grow p-2 border" type="text" placeholder="First Name*" required />
                             <input className="flex-grow p-2 border" type="text" placeholder="Last Name" />
                         </div>
                         <div className="flex space-x-8">
                             <input className="p-2 border" type="email" placeholder="Email" />
-                            <input className="p-2 border" type="tel" placeholder="Mobile Number*" required />
+                            <input onChange={(e) => { setMobileNo(e.target.value) }} className="p-2 border" type="tel" placeholder="MobileNo Number*" required />
                         </div>
                         <div className="flex space-x-20">
                             <select className="p-2 border" required>
@@ -77,7 +101,7 @@ export default function FormNewCustomer() {
                         </div>
                         <input className="flex-grow p-2 border" type="text" placeholder="ERP Comment" />
                         <div className="flex space-x-4">
-                            <button className="px-4 py-2 text-white bg-blue-500 rounded">SAVE & CLOSE</button>
+                            <button onClick={() => OnSave()} className="px-4 py-2 text-white bg-blue-500 rounded">SAVE & CLOSE</button>
                             <button className="px-4 py-2 text-white bg-blue-500 rounded">SAVE & ADD MORE</button>
                         </div>
                     </div>

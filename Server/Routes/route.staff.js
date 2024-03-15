@@ -19,7 +19,7 @@ const limiter = rateLimit({
 });
 
 router.post('/register', Register);
-router.post('/login', limiter, Login);
+router.post('/login', Login);
 router.get('/profile', authMiddleware, getProfile);
 router.delete('/profile', authMiddleware, deleteProfile);
 router.put('/profile', authMiddleware, putProfile);

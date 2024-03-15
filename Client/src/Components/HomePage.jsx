@@ -2,10 +2,40 @@ import Sidebar from "./sidebar";
 import HomeTopContent from "./HomeTopContent";
 import HomeContent from "./HomeContent"
 import HomePageButton from "./HomePageButton";
-import FormNewCustomer from "./FormNewCustomer";
+import { useEffect } from "react";
+import axios from "axios";
+import url from "../../url";
+import { useNavigate } from "react-router-dom";
 
 
 const Homepage = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        const token = localStorage.getItem("token")
+        if (token != undefined) {
+
+            axios.get(url + "staff/profile", {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            }).then((res) => {
+                console.log(res);
+                if (res.status == 200) {
+                    console.log("Auth ", "done");
+                    navigate("/");
+                } else if (res.status == 400) {
+                    console.log("Auth not", "done");
+                    navigate("/login");
+                }
+            }).catch(() => {
+                navigate("/login");
+            })
+
+
+        }
+    }, [])
 
 
     return (
