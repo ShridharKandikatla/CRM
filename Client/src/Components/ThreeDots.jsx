@@ -1,4 +1,4 @@
-import 'flowbite';
+
 import { HiDotsVertical } from "react-icons/hi";
 
 const ThreeDots = () => {
