@@ -46,35 +46,35 @@ export default function FormNewCustomer() {
                             <input className="flex-grow p-2 border" type="text" placeholder="Last Name" />
                         </div>
                         <div className="flex space-x-8">
-                            <input className="p-2 border" type="email" placeholder="Email" />
-                            <input onChange={(e) => { setMobileNo(e.target.value) }} className="p-2 border" type="tel" placeholder="MobileNo Number*" required />
+                            <input className="p-2 border " style={{ width: 251 }} type="email" placeholder="Email" />
+                            <input onChange={(e) => { setMobileNo(e.target.value) }} style={{ width: 246 }} className="p-2 border" type="tel" placeholder="MobileNo Number*" required />
                         </div>
-                        <div className="flex space-x-20">
+                        <div className="flex space-x-10">
                             <select className="p-2 border" required>
-                                <option>Primary Source*      </option>
-                                <option>Primary Source*      </option>
-                                <option>Primary Source*      </option>
-                                <option>Primary Source*      </option>
+                                <option> Primary Source &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
+                                <option>2 Source      </option>
+                                <option>Primary Source      </option>
+                                <option>Primary Source      </option>
                                 {/* Add your options here */}
                             </select>
                             <select className="p-2 border" required>
-                                <option>secondary Source*</option>
-                                <option>secondary Source*</option>
-                                <option>secondary Source*</option>
-                                <option>secondary Source*</option>
+                                <option>secondary Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                <option>secondary Source</option>
+                                <option>secondary Source</option>
+                                <option>secondary Source</option>
                                 {/* Add your options here */}
                             </select>
                         </div>
-                        <div className="flex space-x-32">
+                        <div className="flex space-x-10">
                             <select className="p-2 border" required>
-                                <option>disposition</option>
+                                <option>disposition &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 <option>disposition</option>
                                 <option>disposition</option>
                                 <option>disposition</option>
                                 {/* Add your options here */}
                             </select>
                             <select className="p-2 border" required>
-                                <option>sub disposition</option>
+                                <option>sub disposition &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 <option>sub disposition</option>
                                 <option>sub disposition</option>
                                 <option>sub disposition</option>
@@ -82,16 +82,16 @@ export default function FormNewCustomer() {
                             </select>
 
                         </div>
-                        <div className="flex space-x-36">
+                        <div className="flex space-x-10">
                             <select className="p-2 border" required>
-                                <option>Course</option>
+                                <option>Course &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 <option>Course</option>
                                 <option>Course</option>
                                 <option>Course</option>
                                 {/* Add your options here */}
                             </select>
                             <select className="p-2 border" required>
-                                <option>Specilization</option>
+                                <option>Specilization &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 <option>Specilization</option>
                                 <option>Specilization</option>
                                 <option>Specilization</option>

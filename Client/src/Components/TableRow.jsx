@@ -125,10 +125,10 @@ const TableRow = () => {
     </td> */}
         </tr>
             {showDropDown ?
-                <div className="w-40">
+                <div className="w-52">
                     <tr className="flex flex-row ">
                         <td className="px-20 py-5 text-sm bg-white ">
-                            Lead Age
+                            Lead&nbsp;&nbsp;Age {"value"}
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
                             Course
@@ -137,15 +137,15 @@ const TableRow = () => {
                             Specialization
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            Payment Type
+                            Payment&nbsp;&nbsp;Type
                         </td>
                     </tr>
                     <tr className="flex flex-row">
                         <td className="px-20 py-5 text-sm bg-white ">
-                            REGIStdATION NO
+                            REGIStdATION&nbsp;&nbsp;NO
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            SUB - OISPOSITION
+                            SUB&nbsp;-&nbsp;OISPOSITION
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
                             State
@@ -156,30 +156,30 @@ const TableRow = () => {
                     </tr>
                     <tr className="flex flex-row">
                         <td className="px-20 py-5 text-sm bg-white ">
-                            Lead Id
+                            Lead&nbsp;&nbsp;Id
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
                             QUALIFICATION
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            Lead Creation Date
+                            Lead&nbsp;&nbsp;Creation&nbsp;&nbsp;Date
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            LEAD CREATION DATE
+                            LEAD&nbsp;&nbsp;CREATION&nbsp;&nbsp;DATE
                         </td>
                     </tr>
                     <tr className="flex flex-row">
                         <td className="px-20 py-5 text-sm bg-white ">
-                            Lead Modification Date
+                            Lead&nbsp;&nbsp;Modification&nbsp;&nbsp;Date
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            REFERRED TO UPDATE OATE
+                            REFERRED&nbsp;&nbsp;TO&nbsp;&nbsp;UPDATE&nbsp;&nbsp;OATE
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            Lead Owner
+                            Lead&nbsp;&nbsp;Owner
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            FOLLOWUP COMMENT
+                            FOLLOWUP&nbsp;&nbsp;COMMENT
                         </td>
                     </tr>
                     <tr className="flex flex-row">
@@ -187,7 +187,7 @@ const TableRow = () => {
                             INSTITUTE
                         </td>
                         <td className="px-20 py-5 text-sm bg-white">
-                            ERP COMMENTS
+                            ERP&nbsp;&nbsp;COMMENTS
                         </td>
                     </tr>
                 </div>
