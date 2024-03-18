@@ -2,7 +2,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function createStudent(req, res) {
-  const { firstName, mobile } = req.body.student;
+  const { firstName, lastName, email, mobile, diposition, subDiposition } =
+    req.body.student;
   const { courseName } = req.body.course;
   if (!firstName || !mobile || !courseName) {
     return res.send('All fields are required').status(400);
@@ -11,7 +12,11 @@ async function createStudent(req, res) {
     const newStudent = await prisma.student.create({
       data: {
         firstName,
+        lastName,
+        email,
         mobile,
+        diposition,
+        subDiposition,
         course: {
           create: req.body.course,
         },
@@ -64,7 +69,15 @@ async function getStudentByAnyData(req, res) {
 }
 
 async function updateStudent(req, res) {
-  const { firstName, mobile } = req.body.student;
+  const {
+    gender,
+    firstName,
+    mobile,
+    lastName,
+    email,
+    diposition,
+    subDiposition,
+  } = req.body.student;
   const { courseName } = req.body.course;
   if (!firstName || !mobile || !courseName) {
     return res.send('All fields are required').status(400);
@@ -79,8 +92,13 @@ async function updateStudent(req, res) {
         id: parseInt(id),
       },
       data: {
+        gender,
         firstName,
+        lastName,
         mobile,
+        email,
+        diposition,
+        subDiposition,
         course: {
           update: req.body.course,
         },
