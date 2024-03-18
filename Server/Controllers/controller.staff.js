@@ -46,7 +46,7 @@ async function Login(req, res) {
   const { email, password } = req.body;
   const result = UserSchema.safeParse({ email, password });
   if (!result.success) {
-    return res.send('Invalid email or password').status(400);
+    return res.status(400).send('Invalid email or password');
   }
   try {
     const allUsers = await prisma.staff.findFirst({
@@ -61,17 +61,12 @@ async function Login(req, res) {
     }
 
     res.status(400).send('Invalid email or password');
-
   } catch (e) {
-    res.send('Something went wrong').status(400);
+    res.status(400).send('Something went wrong');
   }
 }
 
 async function getProfile(req, res) {
-  const { id } = req.body;
-  if (!id) {
-    return res.send('ID not found').status(400);
-  }
   try {
     const profile = await prisma.staff.findFirst({
       where: {
