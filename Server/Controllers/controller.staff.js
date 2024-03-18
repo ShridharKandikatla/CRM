@@ -60,14 +60,16 @@ async function Login(req, res) {
       return res.send({ token: withBearer }).status(200);
     }
 
-    res.send('Invalid email or password').status(400);
+    res.status(400).send('Invalid email or password');
+
   } catch (e) {
     res.send('Something went wrong').status(400);
   }
 }
 
 async function getProfile(req, res) {
-  if (!req.id) {
+  const { id } = req.body;
+  if (!id) {
     return res.send('ID not found').status(400);
   }
   try {
