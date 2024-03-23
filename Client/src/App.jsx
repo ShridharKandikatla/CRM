@@ -40,7 +40,7 @@ function App() {
     // Perform logout actions, e.g., clearing cookies
   };
   return (
-    <>+
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />

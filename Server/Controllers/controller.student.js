@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function createStudent(req, res) {
+  console.log(req.body);
   const { firstName, lastName, email, mobile, diposition, subDiposition } =
     req.body.student;
   const { courseName } = req.body.course;
@@ -25,6 +26,7 @@ async function createStudent(req, res) {
         course: true,
       },
     });
+    console.log(newStudent);
     res.json({ newStudent });
   } catch (e) {
     res.send(e).status(400);
