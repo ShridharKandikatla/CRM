@@ -58,12 +58,12 @@ export default function Profile() {
                 >
                   Name
                 </a> */}
-                <a
+                <p
                   href='#'
                   className='block px-4 text-xs text-gray-700 hover:bg-gray-100'
                 >
                   {profile.email}
-                </a>
+                </p>
                 {/* <a
                   href='#'
                   className='block px-4 py-1 text-xs text-gray-700 hover:bg-gray-100'
@@ -76,7 +76,7 @@ export default function Profile() {
               onClick={() => DeleteToken()}
               className='block float-right px-4 py-1 text-gray-700 text-ms hover:bg-gray-100'
             >
-              LogOut
+              Logout
             </button>
           </div>
         )}

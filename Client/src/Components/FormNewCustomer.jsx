@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Modal from './Modal';
 import { FaPlus } from 'react-icons/fa';
 import url from '../../url';
-import axios from 'axios';
 import { useFormik } from 'formik';
 import { newStudentSchema } from '../schema';
 
@@ -28,17 +27,16 @@ export default function FormNewCustomer() {
       initialValues,
       validationSchema: newStudentSchema,
       onSubmit: (values, actions) => {
-        handleStudent(values);
-        // setOpen(false);
-        // actions.resetForm();
+        handleStudent(values, actions);
       },
     });
 
-  const handleStudent = async (student) => {
-    console.log(student);
+  const handleStudent = async (student, actions) => {
     const token = localStorage.getItem('token');
     const course = {
       courseName: student.courseName,
+      specialization: student.specilization,
+      erpComments: student.erp_comment,
     };
     if (token != undefined) {
       const res = await fetch(url + 'student', {
@@ -48,8 +46,15 @@ export default function FormNewCustomer() {
           Authorization: token,
         },
         body: JSON.stringify({ student, course }),
-      });
-      console.log(res);
+      })
+        .then(async (res) => {
+          const data = await res.json();
+          setOpen(false);
+          actions.resetForm();
+        })
+        .catch(() => {
+          alert('Email already exists');
+        });
     }
   };
 
@@ -96,7 +101,7 @@ export default function FormNewCustomer() {
                   className='p-2 border '
                   style={{ width: 251 }}
                   type='email'
-                  placeholder='Email'
+                  placeholder='Email Address'
                   name='email'
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -107,7 +112,7 @@ export default function FormNewCustomer() {
                   style={{ width: 246 }}
                   className='p-2 border'
                   type='tel'
-                  placeholder='MobileNo Number*'
+                  placeholder='Mobile Number*'
                   name='mobile'
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -149,7 +154,7 @@ export default function FormNewCustomer() {
                   required
                 >
                   <option>
-                    secondary
+                    Secondary
                     Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   </option>

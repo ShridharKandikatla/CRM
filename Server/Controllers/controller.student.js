@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function createStudent(req, res) {
-  console.log(req.body);
-  const { firstName, lastName, email, mobile, diposition, subDiposition } =
+  const { firstName, lastName, email, mobile, disposition, sub_disposition } =
     req.body.student;
   const { courseName } = req.body.course;
   if (!firstName || !mobile || !courseName) {
@@ -16,8 +15,8 @@ async function createStudent(req, res) {
         lastName,
         email,
         mobile,
-        diposition,
-        subDiposition,
+        diposition: disposition,
+        subDiposition: sub_disposition,
         course: {
           create: req.body.course,
         },
@@ -26,10 +25,18 @@ async function createStudent(req, res) {
         course: true,
       },
     });
-    console.log(newStudent);
     res.json({ newStudent });
   } catch (e) {
-    res.send(e).status(400);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      // The .code property can be accessed in a type-safe manner
+      if (e.code === 'P2002') {
+        res
+          .send('Email already exists. Please try with different email.')
+          .status(400);
+      } else {
+        res.send('Something went wrong').status(400);
+      }
+    }
   }
 }
 
@@ -66,7 +73,7 @@ async function getStudentByAnyData(req, res) {
     });
     res.send(students);
   } catch (e) {
-    res.send('Something went wrong').status(400);
+    res.status(400).send('Something went wrong');
   }
 }
 
@@ -119,9 +126,10 @@ async function getCounts(req, res) {
   try {
     const statusCounts = await prisma.student.groupBy({
       by: ['diposition'],
-      _count: {
-        diposition: true,
-      },
+      // _count: {
+      //   diposition: true,
+      // },
+      _count: true,
     });
 
     res.send(statusCounts);

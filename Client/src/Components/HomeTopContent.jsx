@@ -2,15 +2,71 @@ import Profile from './Profile';
 import FormNewCustomer from './FormNewCustomer';
 import Bell from './Bell';
 import { useState } from 'react';
+import url from '../../url';
+import useAxios from '../customHooks/useAxios';
+import { useSetRecoilState } from 'recoil';
+import { studentAtom } from '../store/atoms/student';
 
 const HomeTopContent = () => {
-  const [filter, setFilter] = useState(
-    'Search by Name, Email or Mobile Number'
-  );
+  const options = [
+    'Search by Name, Email or Mobile Number',
+    'Search by Name',
+    'Search by Mobile',
+    'Search by Email',
+    'Search by LeadID',
+  ];
+
+  const [filter, setFilter] = useState(options[0]);
   const [input, setInput] = useState('');
+  const { loading, error, sendRequest } = useAxios();
+  const setStudent = useSetRecoilState(studentAtom);
 
   const handleChange = (event) => {
     setFilter(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    try {
+      switch (filter) {
+        case 'Search by Email':
+          const emailResponse = await sendRequest(
+            'post',
+            url + 'student/data',
+            {
+              email: input,
+            }
+          );
+          setStudent(emailResponse);
+          break;
+        case 'Search by Name':
+          const nameResponse = await sendRequest('post', url + 'student/data', {
+            firstName: input,
+          });
+          setStudent(nameResponse);
+          break;
+        case 'Search by Mobile':
+          const mobileResponse = await sendRequest(
+            'post',
+            url + 'student/data',
+            {
+              mobile: input,
+            }
+          );
+          setStudent(mobileResponse);
+          break;
+        case 'Search by LeadID':
+          const idResponse = await sendRequest('post', url + 'student/data', {
+            id: Number(input),
+          });
+          setStudent(idResponse);
+          break;
+        default:
+          alert('Please select a filter');
+          break;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -24,35 +80,33 @@ const HomeTopContent = () => {
                   <div className='relative'>
                     <select
                       value={filter}
-                      className='block w-full h-full px-4 py-2 pr-8 leading-tight text-gray-700 bg-white border border-gray-400 rounded-l appearance-none focus:outline-none focus:bg-white focus:border-gray-500'
                       onChange={handleChange}
+                      className='block w-full h-full px-4 py-2 pr-8 leading-tight text-gray-700 bg-white border border-gray-400 rounded-l appearance-none focus:outline-none focus:bg-white focus:border-gray-500'
                     >
-                      <option value='Search by Name, Email or Mobile Number'>
-                        Basic Search
-                      </option>
-                      <option value='Search by Name'>Name</option>
-                      <option value='Search by Mobile'>Mobile</option>
-                      <option value='Search by Email'>Email Address</option>
-                      <option value='Search by LeadID'>Lead ID</option>
+                      {options.map((option, index) => {
+                        return (
+                          <option key={index} value={option}>
+                            {option === options[0] ? 'Basic Search' : option}
+                          </option>
+                        );
+                      })}
                     </select>
-                    <div className='absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none'></div>
+                    <input
+                      type='text'
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      className='ml-2 px-4 py-2 border border-gray-400 rounded-r focus:outline-none focus:border-blue-500'
+                      placeholder={filter}
+                    />
+                    <div className='absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
+                      <button
+                        onClick={handleSearch}
+                        className='ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+                      >
+                        Search
+                      </button>
+                    </div>
                   </div>
-                </div>
-
-                <div className='relative block'>
-                  <span className='absolute inset-y-0 left-0 flex items-center h-full pl-2'>
-                    <svg
-                      viewBox='0 0 24 24'
-                      className='text-gray-500 fill-current'
-                    >
-                      <path d='M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z'></path>
-                    </svg>
-                  </span>
-                  <input
-                    placeholder={filter}
-                    className='block w-full py-2 pl-8 pr-6 text-sm text-gray-700 placeholder-gray-400 bg-white border border-b border-gray-400 rounded-l rounded-r appearance-none sm:rounded-l-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none'
-                    onChange={(event) => setInput(event.target.value)}
-                  />
                 </div>
 
                 <div className='pl-3 m-2'>

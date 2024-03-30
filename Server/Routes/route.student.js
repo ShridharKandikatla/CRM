@@ -9,9 +9,9 @@ import {
 const router = express.Router();
 
 router.post('/', createStudent);
-router.get('/', getStudents);
-router.get('/data', getStudentByAnyData);
+router.post('/get', getStudents);
+router.post('/data', getStudentByAnyData);
 router.put('/:id', updateStudent);
-router.get('/count',getCounts )
+router.get('/count', getCounts);
 
 export default router;
