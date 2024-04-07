@@ -70,186 +70,216 @@ export default function FormNewCustomer() {
             <div className='flex flex-col p-8 space-y-4 bg-white rounded shadow-lg'>
               <h2 className='text-xl font-bold text-gray-900'>Quick Add</h2>
               <div className='flex space-x-8'>
-                <input
-                  className='flex-grow p-2 border'
-                  type='text'
-                  placeholder='First Name *'
-                  name='firstName'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstName}
-                  required
-                />
-                {touched.firstName && errors.firstName ? (
-                  <p>{errors.firstName}</p>
-                ) : null}
-                <input
-                  className='flex-grow p-2 border'
-                  type='text'
-                  placeholder='Last Name'
-                  name='lastName'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastName}
-                />
-                {touched.lastName && errors.lastName ? (
-                  <p>{errors.lastName}</p>
-                ) : null}
+                <div className='items-end flex-colume'>
+                  <input
+                    className='flex-grow p-2 border'
+                    type='text'
+                    placeholder='First Name *'
+                    name='firstName'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.firstName}
+                    required
+                  />
+
+                  {touched.firstName && errors.firstName ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.firstName}</p>
+                  ) : null}
+
+                </div>
+                <div className=' flex-colume'>
+                  <input
+                    className='flex-grow p-2 border'
+                    type='text'
+                    placeholder='Last Name'
+                    name='lastName'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.lastName}
+                  />
+                  {touched.lastName && errors.lastName ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.lastName}</p>
+                  ) : null}
+                </div>
               </div>
+
               <div className='flex space-x-8'>
-                <input
-                  className='p-2 border '
-                  style={{ width: 251 }}
-                  type='email'
-                  placeholder='Email Address'
-                  name='email'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
-                {touched.email && errors.email ? <p>{errors.email}</p> : null}
-                <input
-                  style={{ width: 246 }}
-                  className='p-2 border'
-                  type='tel'
-                  placeholder='Mobile Number*'
-                  name='mobile'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.mobile}
-                  required
-                />
-                {touched.mobile && errors.mobile ? (
-                  <p>{errors.mobile}</p>
-                ) : null}
+                <div className='flex-colume'>
+
+                  <input
+                    className='p-2 border '
+                    style={{ width: 251 }}
+                    type='email'
+                    placeholder='Email Address'
+                    name='email'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                  {touched.email && errors.email ? <p className='pr-2 text-xs text-red-600'>{errors.email}</p> : null}
+                </div>
+                <div className=' flex-colume'>
+
+                  <input
+                    style={{ width: 246 }}
+                    className='p-2 border'
+                    type='tel'
+                    placeholder='Mobile Number*'
+                    name='mobile'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.mobile}
+                    required
+                  />
+                  {touched.mobile && errors.mobile ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.mobile}</p>
+                  ) : null}
+                </div>
               </div>
               <div className='flex space-x-10'>
-                <select
-                  className='p-2 border'
-                  name='primary_source'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.primary_source}
-                  required
-                >
-                  <option>
-                    {' '}
-                    Primary Source
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                  </option>
-                  <option>2 Source </option>
-                  <option>Primary Source </option>
-                  <option>Primary Source </option>
-                  {/* Add your options here */}
-                </select>
-                {touched.primary_source && errors.primary_source ? (
-                  <p>{errors.primary_source}</p>
-                ) : null}
-                <select
-                  className='p-2 border'
-                  name='secondary_source'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.secondary_source}
-                  required
-                >
-                  <option>
-                    Secondary
-                    Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </option>
-                  <option>secondary Source</option>
-                  <option>secondary Source</option>
-                  <option>secondary Source</option>
-                  {/* Add your options here */}
-                </select>
-                {touched.secondary_source && errors.secondary_source ? (
-                  <p>{errors.secondary_source}</p>
-                ) : null}
+                <div className='items-end flex-column'>
+
+                  <select
+                    className='p-2 border'
+                    onChange={handleChange}
+                    name='primary_source'
+                    onBlur={handleBlur}
+                    value={values.primary_source}
+                    required
+                  >
+                    <option>
+                      {' '}
+                      Primary Source
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
+                    </option>
+                    <option>2 Source </option>
+                    <option>Primary Source </option>
+                    <option>Primary Source </option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.primary_source && errors.primary_source ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.primary_source}</p>
+                  ) : null}
+                </div>
+                <div className='items-end flex-column'>
+
+                  <select
+                    className='p-2 border'
+                    name='secondary_source'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.secondary_source}
+                    required
+                  >
+                    <option>
+                      Secondary
+                      Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option>secondary Source</option>
+                    <option>secondary Source</option>
+                    <option>secondary Source</option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.secondary_source && errors.secondary_source ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.secondary_source}</p>
+                  ) : null}
+                </div>
               </div>
               <div className='flex space-x-10'>
-                <select
-                  className='p-2 border'
-                  name='disposition'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.disposition}
-                  required
-                >
-                  <option>
-                    disposition
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </option>
-                  <option>disposition</option>
-                  <option>disposition</option>
-                  <option>disposition</option>
-                  {/* Add your options here */}
-                </select>
-                {touched.disposition && errors.disposition ? (
-                  <p>{errors.disposition}</p>
-                ) : null}
-                <select
-                  className='p-2 border'
-                  name='sub_disposition'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.sub_disposition}
-                  required
-                >
-                  <option>
-                    sub disposition
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </option>
-                  <option>sub disposition</option>
-                  <option>sub disposition</option>
-                  <option>sub disposition</option>
-                  {/* Add your options here */}
-                </select>
-                {touched.sub_disposition && errors.sub_disposition ? (
-                  <p>{errors.sub_disposition}</p>
-                ) : null}
+                <div className='items-end flex-column'>
+
+                  <select
+                    className='p-2 border'
+                    name='disposition'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.disposition}
+                    required
+                  >
+                    <option>
+                      disposition
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option>disposition</option>
+                    <option>disposition</option>
+                    <option>disposition</option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.disposition && errors.disposition ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.disposition}</p>
+                  ) : null}
+                </div>
+                <div className='items-end flex-column'>
+
+                  <select
+                    className='p-2 border'
+                    name='sub_disposition'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.sub_disposition}
+                    required
+                  >
+                    <option>
+                      sub disposition
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option>sub disposition</option>
+                    <option>sub disposition</option>
+                    <option>sub disposition</option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.sub_disposition && errors.sub_disposition ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.sub_disposition}</p>
+                  ) : null}
+                </div>
               </div>
               <div className='flex space-x-10'>
-                <select
-                  className='p-2 border'
-                  name='courseName'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.courseName}
-                  required
-                >
-                  <option>
-                    Course
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </option>
-                  <option>Course</option>
-                  <option>Course</option>
-                  <option>Course</option>
-                  {/* Add your options here */}
-                </select>
-                {touched.courseName && errors.courseName ? (
-                  <p>{errors.courseName}</p>
-                ) : null}
-                <select
-                  className='p-2 border'
-                  name='specilization'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.specilization}
-                  required
-                >
-                  <option>
-                    Specilization
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </option>
-                  <option>Specilization</option>
-                  <option>Specilization</option>
-                  <option>Specilization</option>
-                  {/* Add your options here */}
-                </select>
-                {touched.specilization && errors.specilization ? (
-                  <p>{errors.specilization}</p>
-                ) : null}
+                <div className='items-end flex-column'>
+                  <select
+                    className='p-2 border'
+                    name='courseName'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.courseName}
+                    required
+                  >
+                    <option>
+                      Course
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option>Course</option>
+                    <option>Course</option>
+                    <option>Course</option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.courseName && errors.courseName ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.courseName}</p>
+                  ) : null}
+                </div>
+                <div className='items-end flex-column'>
+
+                  <select
+                    className='p-2 border'
+                    name='specilization'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.specilization}
+                    required
+                  >
+                    <option>
+                      Specilization
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </option>
+                    <option>Specilization</option>
+                    <option>Specilization</option>
+                    <option>Specilization</option>
+                    {/* Add your options here */}
+                  </select>
+                  {touched.specilization && errors.specilization ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.specilization}</p>
+                  ) : null}
+                </div>
               </div>
               <input
                 className='flex-grow p-2 border'
@@ -261,7 +291,7 @@ export default function FormNewCustomer() {
                 value={values.erp_comment}
               />
               {touched.erp_comment && errors.erp_comment ? (
-                <p>{errors.erp_comment}</p>
+                <p className='pr-2 text-xs text-red-600'>{errors.erp_comment}</p>
               ) : null}
               <div className='flex space-x-4'>
                 <button
@@ -278,6 +308,6 @@ export default function FormNewCustomer() {
           </div>
         </form>
       </Modal>
-    </main>
+    </main >
   );
 }

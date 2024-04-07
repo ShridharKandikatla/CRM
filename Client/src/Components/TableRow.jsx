@@ -17,14 +17,19 @@ import { useRecoilState } from 'recoil';
 import { studentAtom } from '../store/atoms/student';
 
 const TableRow = () => {
-  const [showDropDown, setShowDropDown] = useState(false);
   const student = useRecoilState(studentAtom);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+
+  const toggleDropdown = (itemId) => {
+    setOpenDropdownId(itemId === openDropdownId ? null : itemId);
+  };
   return student[0].map((item) => {
     return (
-      <div>
-        <tr>
+      <div >
+        <tr >
           <td className='px-5 py-5 text-sm bg-white border-b border-gray-200'>
-            <div className='flex items-center'>
+            <div className='flex items-center w-28'>
               <div className='flex-shrink-0'>
                 <input
                   id='inline-checkbox'
@@ -43,13 +48,13 @@ const TableRow = () => {
               </div>
             </div>
           </td>
-          <td className='px-5 py-5 text-sm bg-white border-b border-gray-200'>
-            <table className='border-2 border-gray-200 text-center'>
-              <tr className='border-2'>
-                <td>New call</td>
+          <td className='px-10 pb-2 text-sm bg-white border-b border-gray-200'>
+            <table className='text-center border-2 border-gray-200 '>
+              <tr className='border-2 '>
+                <td className='px-2'>New call</td>
               </tr>
               <tr className='border-2 '>
-                <td>0</td>
+                <td className='px-2'>0</td>
               </tr>
             </table>
           </td>
@@ -68,22 +73,22 @@ const TableRow = () => {
               <IoMdMail />
             </p>
           </td>
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
+          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200 pr-14'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <MdOutlineMessage />
             </p>
           </td>
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
-            <p className='text-gray-900 whitespace-no-wrap border-l border-gray-900'>
-              <FaUser />
-            </p>
+
+          <td className='px-5 py-5 text-xl bg-white border-b border-l border-gray-200 pl-14'>
+
+            <FaUser />
           </td>
           <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <FaUserGraduate />
             </p>
           </td>
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
+          <td className='px-5 py-5 pr-10 text-xl bg-white border-b border-gray-200'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <FaUserClock />
             </p>
@@ -91,7 +96,7 @@ const TableRow = () => {
           {/* <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
           <p className='text-gray-900 whitespace-no-wrap'>View All</p>
         </td> */}
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
+          <td className='px-5 py-5 pl-10 text-xl bg-white border-b border-gray-200'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <FaVideo />
             </p>
@@ -106,7 +111,7 @@ const TableRow = () => {
               <ImMail />
             </p>
           </td>
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
+          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200 pr-14'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <IoLogoWhatsapp />
             </p>
@@ -116,29 +121,29 @@ const TableRow = () => {
               <ThreeDots />
             </p>
           </td>
-          <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
+          <td className='px-5 py-5 pl-10 text-xl bg-white border-b border-gray-200'>
             <p className='text-gray-900 whitespace-no-wrap'>
               <FaChevronDown
                 onClick={() => {
-                  setShowDropDown(!showDropDown);
+                  toggleDropdown(item.id)
                 }}
               />
             </p>
           </td>
         </tr>
-        {showDropDown ? (
-          <div className='w-52'>
-            <tr className='flex flex-row '>
+        {item.id === openDropdownId ? (
+          <div >
+            <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
-                Lead&nbsp;&nbsp;Age {'value'}
+                Lead Age {'value'}
               </td>
               <td className='px-20 py-5 text-sm bg-white'>Course</td>
               <td className='px-20 py-5 text-sm bg-white'>Specialization</td>
               <td className='px-20 py-5 text-sm bg-white'>
-                Payment&nbsp;&nbsp;Type
+                Payment Type
               </td>
             </tr>
-            <tr className='flex flex-row'>
+            <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
                 REGIStdATION&nbsp;&nbsp;NO
               </td>
@@ -148,7 +153,7 @@ const TableRow = () => {
               <td className='px-20 py-5 text-sm bg-white'>State</td>
               <td className='px-20 py-5 text-sm bg-white'>City</td>
             </tr>
-            <tr className='flex flex-row'>
+            <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
                 Lead&nbsp;&nbsp;Id
               </td>
@@ -160,7 +165,7 @@ const TableRow = () => {
                 LEAD&nbsp;&nbsp;CREATION&nbsp;&nbsp;DATE
               </td>
             </tr>
-            <tr className='flex flex-row'>
+            <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
                 Lead&nbsp;&nbsp;Modification&nbsp;&nbsp;Date
               </td>
@@ -174,7 +179,7 @@ const TableRow = () => {
                 FOLLOWUP&nbsp;&nbsp;COMMENT
               </td>
             </tr>
-            <tr className='flex flex-row'>
+            <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>INSTITUTE</td>
               <td className='px-20 py-5 text-sm bg-white'>
                 ERP&nbsp;&nbsp;COMMENTS
