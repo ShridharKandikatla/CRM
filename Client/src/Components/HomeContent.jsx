@@ -48,16 +48,11 @@ const HomeContent = () => {
     <>
       <div className='mx-5'>
         <div className='inline-block overflow-hidden rounded-lg shadow '>
-          {/* {student && student[0].map((item) => { */}
-          {/* return ( */}
           <table >
             <tbody >
-              {/* <TableRow item={item} /> */}
               <TableRow />
             </tbody>
           </table>
-          {/* ) */}
-          {/* })} */}
           <div className='flex flex-col items-center px-5 py-5 bg-white border-t xs:flex-row xs:justify-between '>
             <span className='text-xs text-gray-900 xs:text-sm'>
               Showing {startIndex} to {endIndex}
