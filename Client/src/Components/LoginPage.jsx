@@ -26,6 +26,10 @@ const LoginPage = () => {
   }, []);
 
   const login = async () => {
+    if (email == '' || password == '') {
+      alert('Please enter email and password');
+      return;
+    }
     axios
       .post(url + 'staff/login', {
         email,
@@ -35,8 +39,8 @@ const LoginPage = () => {
         localStorage.setItem('token', res.data.token);
         navigate('/');
       })
-      .catch((err) => {
-        alert(err.response.data);
+      .catch(() => {
+        alert('Internal Server Error');
       });
   };
 

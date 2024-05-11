@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 import { studentAtom } from '../store/atoms/student';
 import url from '../../url';
 
-
 const HomeContent = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [student, setStudent] = useRecoilState(studentAtom);
+  const [students, setStudents] = useRecoilState(studentAtom);
 
   const handlePrevClick = () => {
     if (pageNumber > 1) {
@@ -24,11 +23,11 @@ const HomeContent = () => {
     const maxPageNumber = Math.ceil(totalItems / itemsPerPage);
 
     if (pageNumber < maxPageNumber) {
-      setPageNumber(pageNumber + 1);
+      fetchNextPage(pageNumber + 1);
     }
   };
 
-  useEffect(() => {
+  const fetchNextPage = (nextPageNumber) => {
     const token = localStorage.getItem('token');
     fetch(url + 'student/get', {
       method: 'POST',
@@ -36,20 +35,28 @@ const HomeContent = () => {
         'Content-Type': 'application/json',
         Authorization: token,
       },
-      body: JSON.stringify({ pageNumber }),
+      body: JSON.stringify({ pageNumber: nextPageNumber }),
     }).then(async (res) => {
       const data = await res.json();
-      console.log(data);
-      setStudent(data);
+      if (data.length === 0) {
+        alert('No students found');
+        return;
+      }
+      setStudents(data);
+      setPageNumber(nextPageNumber);
     });
-  }, [pageNumber]);
+  };
+
+  useEffect(() => {
+    fetchNextPage(pageNumber);
+  }, []);
 
   return (
     <>
       <div className='mx-5'>
         <div className='inline-block overflow-hidden rounded-lg shadow '>
-          <table >
-            <tbody >
+          <table>
+            <tbody>
               <TableRow />
             </tbody>
           </table>

@@ -83,9 +83,10 @@ export default function FormNewCustomer() {
                   />
 
                   {touched.firstName && errors.firstName ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.firstName}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.firstName}
+                    </p>
                   ) : null}
-
                 </div>
                 <div className=' flex-colume'>
                   <input
@@ -98,14 +99,15 @@ export default function FormNewCustomer() {
                     value={values.lastName}
                   />
                   {touched.lastName && errors.lastName ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.lastName}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.lastName}
+                    </p>
                   ) : null}
                 </div>
               </div>
 
               <div className='flex space-x-8'>
                 <div className='flex-colume'>
-
                   <input
                     className='p-2 border '
                     style={{ width: 251 }}
@@ -116,10 +118,11 @@ export default function FormNewCustomer() {
                     onBlur={handleBlur}
                     value={values.email}
                   />
-                  {touched.email && errors.email ? <p className='pr-2 text-xs text-red-600'>{errors.email}</p> : null}
+                  {touched.email && errors.email ? (
+                    <p className='pr-2 text-xs text-red-600'>{errors.email}</p>
+                  ) : null}
                 </div>
                 <div className=' flex-colume'>
-
                   <input
                     style={{ width: 246 }}
                     className='p-2 border'
@@ -138,7 +141,6 @@ export default function FormNewCustomer() {
               </div>
               <div className='flex space-x-10'>
                 <div className='items-end flex-column'>
-
                   <select
                     className='p-2 border'
                     onChange={handleChange}
@@ -152,17 +154,19 @@ export default function FormNewCustomer() {
                       Primary Source
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
                     </option>
-                    <option>2 Source </option>
-                    <option>Primary Source </option>
-                    <option>Primary Source </option>
+                    <option>EE-Check 02</option>
+                    <option>EE-Check 03</option>
+                    <option>Online</option>
+                    <option>Offline</option>
                     {/* Add your options here */}
                   </select>
                   {touched.primary_source && errors.primary_source ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.primary_source}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.primary_source}
+                    </p>
                   ) : null}
                 </div>
                 <div className='items-end flex-column'>
-
                   <select
                     className='p-2 border'
                     name='secondary_source'
@@ -176,19 +180,20 @@ export default function FormNewCustomer() {
                       Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </option>
-                    <option>secondary Source</option>
-                    <option>secondary Source</option>
+                    <option>EE-Check</option>
+                    <option>EE-Check02</option>
                     <option>secondary Source</option>
                     {/* Add your options here */}
                   </select>
                   {touched.secondary_source && errors.secondary_source ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.secondary_source}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.secondary_source}
+                    </p>
                   ) : null}
                 </div>
               </div>
               <div className='flex space-x-10'>
                 <div className='items-end flex-column'>
-
                   <select
                     className='p-2 border'
                     name='disposition'
@@ -201,17 +206,22 @@ export default function FormNewCustomer() {
                       disposition
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </option>
-                    <option>disposition</option>
-                    <option>disposition</option>
-                    <option>disposition</option>
-                    {/* Add your options here */}
+                    <option>01 - New</option>
+                    <option>03-Call Back Followup</option>
+                    <option>05-Inetrested Followup</option>
+                    <option>07-Prospect</option>
+                    <option>09-To be enrolled</option>
+                    <option>11-Recycled</option>
+                    <option>13-Not Interested</option>
+                    <option>15-Wrong Phone Number</option>
                   </select>
                   {touched.disposition && errors.disposition ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.disposition}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.disposition}
+                    </p>
                   ) : null}
                 </div>
                 <div className='items-end flex-column'>
-
                   <select
                     className='p-2 border'
                     name='sub_disposition'
@@ -230,7 +240,9 @@ export default function FormNewCustomer() {
                     {/* Add your options here */}
                   </select>
                   {touched.sub_disposition && errors.sub_disposition ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.sub_disposition}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.sub_disposition}
+                    </p>
                   ) : null}
                 </div>
               </div>
@@ -254,11 +266,12 @@ export default function FormNewCustomer() {
                     {/* Add your options here */}
                   </select>
                   {touched.courseName && errors.courseName ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.courseName}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.courseName}
+                    </p>
                   ) : null}
                 </div>
                 <div className='items-end flex-column'>
-
                   <select
                     className='p-2 border'
                     name='specilization'
@@ -277,7 +290,9 @@ export default function FormNewCustomer() {
                     {/* Add your options here */}
                   </select>
                   {touched.specilization && errors.specilization ? (
-                    <p className='pr-2 text-xs text-red-600'>{errors.specilization}</p>
+                    <p className='pr-2 text-xs text-red-600'>
+                      {errors.specilization}
+                    </p>
                   ) : null}
                 </div>
               </div>
@@ -291,7 +306,9 @@ export default function FormNewCustomer() {
                 value={values.erp_comment}
               />
               {touched.erp_comment && errors.erp_comment ? (
-                <p className='pr-2 text-xs text-red-600'>{errors.erp_comment}</p>
+                <p className='pr-2 text-xs text-red-600'>
+                  {errors.erp_comment}
+                </p>
               ) : null}
               <div className='flex space-x-4'>
                 <button
@@ -308,6 +325,6 @@ export default function FormNewCustomer() {
           </div>
         </form>
       </Modal>
-    </main >
+    </main>
   );
 }

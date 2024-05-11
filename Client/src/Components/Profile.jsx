@@ -33,7 +33,6 @@ export default function Profile() {
 
   return (
     <div>
-      {/*  */}
       <div className='relative inline-block'>
         <button
           onClick={toggleDropdown}
@@ -62,7 +61,7 @@ export default function Profile() {
                   href='#'
                   className='block px-4 text-xs text-gray-700 hover:bg-gray-100'
                 >
-                  {profile.email}
+                  {profile?.email}
                 </p>
                 {/* <a
                   href='#'

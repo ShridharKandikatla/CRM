@@ -23,7 +23,7 @@ model Student {
   mobile    String 
   diposition String @default("01 - New")
   subDiposition String? @default("Not Known")
-
+   createdAt    DateTime @default(now())
 
   course       Course? 
   payment Payment?

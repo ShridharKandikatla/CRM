@@ -20,23 +20,53 @@ const TableRow = () => {
   const student = useRecoilState(studentAtom);
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
-
   const toggleDropdown = (itemId) => {
     setOpenDropdownId(itemId === openDropdownId ? null : itemId);
   };
-  return student[0].map((item) => {
+
+  function calculateDaysAgo(createdAt) {
+    const currentDate = new Date();
+    const createdDate = new Date(createdAt);
+
+    const timeDifference = currentDate.getTime() - createdDate.getTime();
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (seconds < 60) {
+      return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    } else if (minutes < 60) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    } else if (hours < 24) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+  }
+
+  function leadCreationDate(createdAt) {
+    console.log(createdAt);
+    const date = new Date(createdAt);
+    const dayOfMonth = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${dayOfMonth}/${month}/${year}`;
+  }
+
+  return student[0]?.map((item) => {
     return (
-      <div >
-        <tr >
+      <div>
+        <tr>
           <td className='px-5 py-5 text-sm bg-white border-b border-gray-200'>
             <div className='flex items-center w-28'>
               <div className='flex-shrink-0'>
-                <input
+                {/* <input
                   id='inline-checkbox'
                   type='checkbox'
                   defaultValue
                   className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-                />
+                /> */}
               </div>
               <div className='ml-3'>
                 <div className='text-sm whitespace-no-wrap'>
@@ -80,7 +110,6 @@ const TableRow = () => {
           </td>
 
           <td className='px-5 py-5 text-xl bg-white border-b border-l border-gray-200 pl-14'>
-
             <FaUser />
           </td>
           <td className='px-5 py-5 text-xl bg-white border-b border-gray-200'>
@@ -125,44 +154,44 @@ const TableRow = () => {
             <p className='text-gray-900 whitespace-no-wrap'>
               <FaChevronDown
                 onClick={() => {
-                  toggleDropdown(item.id)
+                  toggleDropdown(item.id);
                 }}
               />
             </p>
           </td>
         </tr>
         {item.id === openDropdownId ? (
-          <div >
+          <div>
             <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
-                Lead Age {'value'}
+                Lead Age {calculateDaysAgo(item?.createdAt)}
               </td>
-              <td className='px-20 py-5 text-sm bg-white'>Course</td>
-              <td className='px-20 py-5 text-sm bg-white'>Specialization</td>
               <td className='px-20 py-5 text-sm bg-white'>
-                Payment Type
+                Course: {item.course?.courseName}
               </td>
+              <td className='px-20 py-5 text-sm bg-white'>
+                Specialization: {item.course?.specialization}
+              </td>
+              <td className='px-20 py-5 text-sm bg-white'>Payment Type</td>
             </tr>
             <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
-                REGIStdATION&nbsp;&nbsp;NO
+                REGISTRATION&nbsp;&nbsp;NO
               </td>
               <td className='px-20 py-5 text-sm bg-white'>
-                SUB&nbsp;-&nbsp;OISPOSITION
+                SUB&nbsp;-&nbsp;DISPOSITION : {item.subDiposition}
               </td>
               <td className='px-20 py-5 text-sm bg-white'>State</td>
               <td className='px-20 py-5 text-sm bg-white'>City</td>
             </tr>
             <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>
-                Lead&nbsp;&nbsp;Id
+                Lead&nbsp;&nbsp;ID: E{item.id}
               </td>
               <td className='px-20 py-5 text-sm bg-white'>QUALIFICATION</td>
               <td className='px-20 py-5 text-sm bg-white'>
-                Lead&nbsp;&nbsp;Creation&nbsp;&nbsp;Date
-              </td>
-              <td className='px-20 py-5 text-sm bg-white'>
-                LEAD&nbsp;&nbsp;CREATION&nbsp;&nbsp;DATE
+                Lead&nbsp;&nbsp;Creation&nbsp;&nbsp;Date:&nbsp;
+                {leadCreationDate(item?.createdAt)}
               </td>
             </tr>
             <tr className=''>
@@ -170,7 +199,7 @@ const TableRow = () => {
                 Lead&nbsp;&nbsp;Modification&nbsp;&nbsp;Date
               </td>
               <td className='px-20 py-5 text-sm bg-white'>
-                REFERRED&nbsp;&nbsp;TO&nbsp;&nbsp;UPDATE&nbsp;&nbsp;OATE
+                REFERRED&nbsp;&nbsp;TO&nbsp;&nbsp;UPDATE&nbsp;&nbsp;DATE
               </td>
               <td className='px-20 py-5 text-sm bg-white'>
                 Lead&nbsp;&nbsp;Owner
@@ -182,7 +211,7 @@ const TableRow = () => {
             <tr className=''>
               <td className='px-20 py-5 text-sm bg-white '>INSTITUTE</td>
               <td className='px-20 py-5 text-sm bg-white'>
-                ERP&nbsp;&nbsp;COMMENTS
+                ERP&nbsp;&nbsp;COMMENTS: {item.course?.erpComments}
               </td>
             </tr>
           </div>

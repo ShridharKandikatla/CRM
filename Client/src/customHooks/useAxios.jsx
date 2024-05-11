@@ -7,13 +7,12 @@ const useAxios = () => {
   const [error, setError] = useState(null);
 
   const sendRequest = async (method, url, data) => {
-    console.log(data);
     setLoading(true);
     try {
       const response = await axios({
         method,
         url,
-        data, 
+        data,
         headers: {
           Authorization: localStorage.getItem('token'),
           'Content-Type': 'application/json',
@@ -24,7 +23,6 @@ const useAxios = () => {
     } catch (error) {
       setLoading(false);
       setError(error);
-      throw error;
     }
   };
 

@@ -50,6 +50,9 @@ async function getStudents(req, res) {
     const data = await prisma.student.findMany({
       skip: offset,
       take: 10,
+      orderBy: {
+        createdAt: 'desc',
+      },
       include: {
         course: true,
       },
@@ -65,11 +68,23 @@ async function getStudentByAnyData(req, res) {
     return res.send('Body not found').status(400);
   }
   try {
+    const key = Object.keys(req.body)[0];
+    const value = req.body[key];
+    const whereCondition = {};
+    if (key != 'id') {
+      whereCondition[key] = {
+        contains: value,
+        mode: 'insensitive',
+      };
+    }
     const students = await prisma.student.findMany({
       include: {
         course: true,
       },
-      where: req.body,
+      where: {
+        ...req.body,
+        ...whereCondition,
+      },
     });
     res.send(students);
   } catch (e) {
@@ -126,9 +141,6 @@ async function getCounts(req, res) {
   try {
     const statusCounts = await prisma.student.groupBy({
       by: ['diposition'],
-      // _count: {
-      //   diposition: true,
-      // },
       _count: true,
     });
 
