@@ -18,6 +18,7 @@ import { studentAtom } from '../store/atoms/student';
 
 const TableRow = () => {
   const student = useRecoilState(studentAtom);
+  console.log(student);
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const toggleDropdown = (itemId) => {

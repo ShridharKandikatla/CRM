@@ -18,7 +18,7 @@ const Homepage = () => {
   return (
     <div className='flex'>
       <Sidebar />
-      <div>
+      <div> 
         <HomeTopContent />
         <HomePageButton />
         <HomeContent />

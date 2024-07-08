@@ -124,9 +124,19 @@ const HomePageButton = () => {
           setStudent(data);
         });
         break;
-      case "New":
-        break;
       default:
+        fetch(url + "student/filterStudent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({ dipositionName: buttonName }),
+        }).then(async (res) => {
+          const data = await res.json();
+          console.log(data);
+          setStudent(data);
+        });
         break;
     }
   };

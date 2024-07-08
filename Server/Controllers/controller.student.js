@@ -149,11 +149,28 @@ async function getCounts(req, res) {
     res.send('Something went wrong').status(400);
   }
 }
-
+async function filterStudent(req, res) {
+  console.log('f',req.body.dipositionName);
+  
+  try {
+    const newItems = await prisma.student.findMany({
+      where:{
+        diposition:{
+          contains:req.body.dipositionName
+        }
+      }
+    });
+    console.log('Items with disposition "01 - New":', newItems);
+    res.send(newItems);
+  } catch (error) {
+    res.send('Something went wrong').status(400);
+  }
+}
 export {
   createStudent,
   getStudents,
   getStudentByAnyData,
   updateStudent,
   getCounts,
+  filterStudent,
 };
